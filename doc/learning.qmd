@@ -4,11 +4,27 @@ author: "Sidse Høyer"
 format: html
 ---
 
-```{r}
-usethis::use_data_raw("nmr-omics")
+```{r setup}
+#| include: false
+library(tidyverse)
+source(here::here("R/functions.R"))
+lipidomics<-read_csv(here::here("data/lipidomics.csv"))
 ```
 
-## Poorly formatted markdown
+## Basic statistics
 
--   List item 1
--   List item 2
+```{r}
+lipidomics %>% 
+    group_by(metabolite) %>% 
+    summarise(across(
+        value, 
+        list(
+            mean=mean,
+            sd=sd
+        )
+    )) %>% 
+    mutate(across(
+        where(is.numeric),
+        ~round(.x, digits=1)
+    ))
+```
