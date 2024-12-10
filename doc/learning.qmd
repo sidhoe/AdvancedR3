@@ -4,8 +4,11 @@ author: "Sidse Høyer"
 format: html
 ---
 
-
 ```{r}
 usethis::use_data_raw("nmr-omics")
 ```
 
+## Poorly formatted markdown
+
+-   List item 1
+-   List item 2
